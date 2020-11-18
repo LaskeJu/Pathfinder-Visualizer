@@ -1,0 +1,13 @@
+.cell {
+    width: 30px;
+    height: 30px;
+    background-color: lightblue;
+    box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    border: 1px solid black;
+}
+
+.isWall {
+    background-color: darkcyan;
+}
