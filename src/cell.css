@@ -1,6 +1,6 @@
 .cell {
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     background-color: lightblue;
     box-sizing: border-box;
     -moz-box-sizing: border-box;
@@ -10,4 +10,12 @@
 
 .isWall {
     background-color: darkcyan;
+}
+
+.isStart {
+    background-color: pink;
+}
+
+.isEnd {
+    background-color: chocolate;
 }
