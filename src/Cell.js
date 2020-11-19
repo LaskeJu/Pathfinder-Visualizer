@@ -18,7 +18,7 @@ class Cell extends Component {
         } = this.props;
         const extraClassName = isWall ? 'isWall' : isStart ? 'isStart' : isEnd ? 'isEnd' : '';
         return (
-            <div className={`cell ${extraClassName}`}
+            <div id={`row${row}col${col}`} className={`cell ${extraClassName}`}
                  onClick={() => handleClick(row, col)}
                  onMouseEnter={() => handleMouseEnter(row, col)}
                  onMouseDown={() => handleMouseDown()}

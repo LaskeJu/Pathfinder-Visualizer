@@ -2,6 +2,7 @@ import React, {Component} from 'react'
 import Cell from './Cell';
 import Navigation from "./Navigation";
 import './grid.css';
+import {dijkstra, getShortestWay} from './algorithm/dijkstra';
 
 const START_ACTION = 0;
 const END_ACTION = 1;
@@ -12,6 +13,8 @@ class Grid extends Component {
         rows: [],
         isMouseDown: false,
         selectedAction: START_ACTION,
+        startCell: null,
+        endCell: null,
     }
 
     componentDidMount() {
@@ -44,8 +47,10 @@ class Grid extends Component {
             });
             if (this.state.selectedAction === START_ACTION) {
                 cell.isStart = !cell.isStart;
+                this.setState({startCell: cell});
             } else if(this.state.selectedAction === END_ACTION) {
                 cell.isEnd = !cell.isEnd;
+                this.setState({endCell: cell});
             }
             newRows[row][col] = cell;
             this.setState({rows: newRows});
@@ -64,6 +69,43 @@ class Grid extends Component {
 
     updateSelectedActionHandler = (actionType) => {
         this.setState({selectedAction: actionType});
+    }
+
+    animate = (cells, className, time, timeOffset = 0) => {
+        cells.forEach((cell, index) => {
+            if (cell.isVisited && !cell.isWall) {
+                let ele = document.getElementById('row' + cell.row + 'col' + cell.col);
+                if (ele) {
+                    console.log('a');
+                    setTimeout(() => {
+                        ele.classList.add(className);
+                    }, index * time + timeOffset);
+                }
+            }
+        });
+    }
+
+    getVisitedCellsForAnimation = (rows) => {
+        let visitedCells = [];
+        rows.forEach((row) => {
+            row.forEach((col) => {
+                visitedCells.push(col);
+            })
+        })
+        visitedCells = visitedCells.sort((nodeA, nodeB) => nodeA.distance - nodeB.distance);
+        visitedCells = visitedCells.slice(0, visitedCells.indexOf(this.state.endCell));
+        return visitedCells;
+    }
+
+    visualizeAlgorithm = () => {
+        let {rows} = this.state;
+        dijkstra(rows, this.state.startCell, this.state.endCell);
+        let visitedCells = this.getVisitedCellsForAnimation(rows);
+        let shortestWay = getShortestWay(this.state.startCell, this.state.endCell);
+
+        this.animate(visitedCells, 'isVisited', 5);
+        this.animate(shortestWay, 'isShortestWay', 10, 5*visitedCells.length);
+
     }
 
     render() {
@@ -94,7 +136,9 @@ class Grid extends Component {
                         )
                     })}
                 </div>
-                <Navigation selectedAction={selectedAction} updateSelectedActionHandler={this.updateSelectedActionHandler} />
+                <Navigation selectedAction={selectedAction}
+                            updateSelectedActionHandler={this.updateSelectedActionHandler}
+                            startVisualize={() => this.visualizeAlgorithm()} />
             </div>
         )
     }
@@ -119,6 +163,9 @@ const createCell = (col, row) => {
         isWall: false,
         isStart: false,
         isEnd: false,
+        prevCel: null,
+        distance: Infinity,
+        isVisited: false,
     };
 }
 
