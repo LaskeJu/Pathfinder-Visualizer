@@ -1,0 +1,63 @@
+.navigation {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.navigation button {
+    font-size: 18px;
+    flex: 1 0 19%; /* explanation below */
+    margin: 5px;
+    height: 50px;
+    color: white;
+}
+
+.navigation button:hover {
+    cursor: pointer;
+}
+
+.button-start {
+    background-color: darkgreen;
+}
+
+.button-end {
+    background-color: darkgoldenrod;
+}
+
+.button-wall {
+    background-color: gray;
+}
+
+.button-visualize {
+    background-color: rgba(16, 161, 144, 0.75);
+}
+
+.button-refresh {
+    color: black !important;
+}
+
+.text-center {
+    text-align: center;
+}
+
+.p {
+    padding: 20px;
+}
+
+.label {
+    margin-left: 5px;
+    position: absolute;
+    width: 20px;
+    height: 20px;
+}
+
+.normalField {
+    background-color: lightblue;
+}
+
+.pathField {
+    background-color: rgba(110, 7, 7, 0.95);
+}
+
+.visitedField {
+    background-color: rgba(16, 161, 144, 0.75);
+}

@@ -1,4 +1,6 @@
 import React, {Component} from 'react'
+import { FaRunning } from 'react-icons/fa';
+import { GiStairsGoal } from "react-icons/gi";
 
 import './cell.css';
 
@@ -23,6 +25,8 @@ class Cell extends Component {
                  onMouseEnter={() => handleMouseEnter(row, col)}
                  onMouseDown={() => handleMouseDown()}
                  onMouseUp={() => handleMouseUp()}>
+                {isStart && <FaRunning />}
+                {isEnd && <GiStairsGoal />}
             </div>
         )
     }

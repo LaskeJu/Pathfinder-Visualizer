@@ -113,6 +113,7 @@ class Grid extends Component {
 
         return (
             <div>
+                <h2 className="text-center">Pathfinder Visualization</h2>
                 <div className="grid">
                     {rows.map((row, rowIndex) => {
                         return (
@@ -146,9 +147,9 @@ class Grid extends Component {
 
 const getGrid = () => {
     let rows = [];
-    for (let row = 0; row < 30; row++) {
+    for (let row = 0; row < 32; row++) {
         let cols = [];
-        for (let col = 0; col < 45; col++) {
+        for (let col = 0; col < 55; col++) {
             cols.push(createCell(col, row))
         }
         rows.push(cols);

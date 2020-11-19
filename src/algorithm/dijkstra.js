@@ -54,6 +54,9 @@ export function getShortestWay(startCell, endCell) {
     let cell = endCell;
     let path = [];
     do {
+        if (!cell) {
+            return path.reverse();
+        }
         path.push(cell);
         cell = cell.prevCel;
     } while (cell !== startCell)
