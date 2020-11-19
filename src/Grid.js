@@ -26,8 +26,10 @@ class Grid extends Component {
         if (this.state.isMouseDown && this.state.selectedAction === WALL_ACTION) {
             let newRows = this.state.rows;
             let cell = newRows[row][col];
-            cell.isWall = !cell.isWall;
-            this.setState({rows: newRows});
+            if (!cell.isStart && !cell.isEnd) {
+                cell.isWall = !cell.isWall;
+                this.setState({rows: newRows});
+            }
         }
     }
 
